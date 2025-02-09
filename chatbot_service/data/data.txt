@@ -1,0 +1,877 @@
+[ 
+  {
+    "input": "Mua sách học tiếng Anh 300k",
+    "output": {
+      "category": "Học tập",
+      "advice": "Đầu tư vào sách học tiếng Anh là hợp lý. Hãy chắc chắn rằng sách phù hợp với trình độ và mục tiêu học tập của bạn."
+    }
+  },
+  {
+    "input": "Đi xem phim 200k",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Đây là mức chi tiêu hợp lý cho giải trí. Hãy đảm bảo bạn không chi tiêu quá nhiều vào các hoạt động tương tự trong tháng."
+    }
+  },
+  {
+    "input": "Trả tiền thuê nhà 5 triệu",
+    "output": {
+      "category": "Nhà ở",
+      "advice": "Chi phí thuê nhà chiếm tỷ lệ lớn trong ngân sách. Hãy đảm bảo bạn có thể cân đối các khoản chi khác để không bị thiếu hụt."
+    }
+  },
+  {
+    "input": "Mua điện thoại mới 15 triệu",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Đây là khoản chi lớn, hãy cân nhắc nếu điện thoại thật sự cần thiết hoặc phù hợp với ngân sách hiện tại của bạn."
+    }
+  },
+  {
+    "input": "Mua rau củ 150k",
+    "output": {
+      "category": "Ăn uống",
+      "advice": "Chi tiêu cho rau củ là cần thiết và lành mạnh. Hãy ưu tiên thực phẩm tươi sống để đảm bảo sức khỏe."
+    }
+  },
+  {
+    "input": "Học online khóa lập trình 2 triệu",
+    "output": {
+      "category": "Học tập",
+      "advice": "Đầu tư vào học tập là rất đáng giá. Hãy đảm bảo bạn dành thời gian để theo sát khóa học và áp dụng kiến thức vào thực tế."
+    }
+  },
+  {
+    "input": "Đi du lịch cuối tuần 3 triệu",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Du lịch giúp bạn thư giãn và tái tạo năng lượng. Hãy cân nhắc chi phí và lên kế hoạch kỹ để tránh vượt ngân sách."
+    }
+  },
+  {
+    "input": "Mua tủ lạnh mới 7 triệu",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Đây là khoản đầu tư dài hạn cho gia đình. Hãy chọn sản phẩm chất lượng tốt để sử dụng lâu dài và tiết kiệm năng lượng."
+    }
+  },
+  {
+    "input": "Thanh toán tiền điện 1.2 triệu",
+    "output": {
+      "category": "Nhà ở",
+      "advice": "Chi phí điện có thể giảm nếu bạn sử dụng các thiết bị tiết kiệm năng lượng. Xem xét tắt các thiết bị không cần thiết để tiết kiệm hơn."
+    }
+  },
+  {
+    "input": "Mua quà sinh nhật cho bạn 500k",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Chi phí tặng quà cho bạn bè là hợp lý. Hãy chọn món quà ý nghĩa và phù hợp với ngân sách của bạn."
+    }
+  },
+  {
+    "input": "Đi uống cà phê với bạn 100k",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Đây là chi phí nhỏ và hợp lý để giao lưu với bạn bè. Hãy theo dõi tổng chi tiêu để không vượt ngân sách."
+    }
+  },
+  {
+    "input": "Mua laptop mới 25 triệu",
+    "output": {
+      "category": "Học tập",
+      "advice": "Đây là khoản đầu tư lớn cho học tập và làm việc. Hãy chọn laptop có cấu hình phù hợp với nhu cầu và sử dụng lâu dài."
+    }
+  },
+  {
+    "input": "Đăng ký tập gym 1 triệu/tháng",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Chi tiêu cho sức khỏe là cần thiết. Hãy đảm bảo bạn duy trì việc tập luyện đều đặn để xứng đáng với số tiền bỏ ra."
+    }
+  },
+  {
+    "input": "Mua đồ ăn nhanh 250k",
+    "output": {
+      "category": "Ăn uống",
+      "advice": "Chi tiêu cho đồ ăn nhanh nên hạn chế để bảo vệ sức khỏe. Cân nhắc chuyển sang các bữa ăn tự nấu để tiết kiệm hơn."
+    }
+  },
+  {
+    "input": "Sửa xe máy 1.5 triệu",
+    "output": {
+      "category": "Phương tiện",
+      "advice": "Sửa xe máy là chi phí cần thiết để đảm bảo an toàn khi di chuyển. Hãy kiểm tra định kỳ để tránh các chi phí lớn hơn trong tương lai."
+    }
+  },
+  {
+    "input": "Mua bàn làm việc 2 triệu",
+    "output": {
+      "category": "Nhà ở",
+      "advice": "Đầu tư vào bàn làm việc giúp bạn làm việc hiệu quả hơn tại nhà. Chọn sản phẩm chất lượng để sử dụng lâu dài."
+    }
+  },
+  {
+    "input": "Thanh toán học phí đại học 20 triệu",
+    "output": {
+      "category": "Học tập",
+      "advice": "Học phí đại học là khoản chi lớn nhưng cần thiết cho tương lai. Hãy cân nhắc các chương trình hỗ trợ tài chính nếu gặp khó khăn."
+    }
+  },
+  {
+    "input": "Mua vé máy bay đi công tác 5 triệu",
+    "output": {
+      "category": "Công việc",
+      "advice": "Đây là chi phí cần thiết cho công việc. Lên kế hoạch và đặt vé sớm để tiết kiệm chi phí."
+    }
+  },
+  {
+    "input": "Mua quần áo mùa đông 3 triệu",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Chi tiêu cho quần áo mùa đông là cần thiết. Hãy chọn đồ chất lượng để sử dụng được nhiều năm."
+    }
+  },
+  {
+    "input": "Đi ăn buffet với bạn 600k",
+    "output": {
+      "category": "Ăn uống",
+      "advice": "Buffet là chi tiêu hợp lý nếu bạn tận hưởng trọn vẹn trải nghiệm. Hãy cân nhắc tần suất để tránh vượt ngân sách."
+    }
+  },
+  {
+    "input": "Mua bảo hiểm sức khỏe 10 triệu/năm",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Mua bảo hiểm sức khỏe là một quyết định sáng suốt. Hãy kiểm tra các điều khoản kỹ lưỡng để đảm bảo phù hợp với nhu cầu của bạn."
+    }
+  },
+  {
+    "input": "Đăng ký khóa học yoga 2 triệu",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Yoga giúp cải thiện sức khỏe và tinh thần. Hãy tận dụng khóa học này để nâng cao chất lượng cuộc sống."
+    }
+  },
+  {
+    "input": "Mua vé xem ca nhạc 1 triệu",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Đây là một trải nghiệm đáng giá nếu bạn yêu thích âm nhạc. Hãy đảm bảo chi tiêu này không ảnh hưởng đến các mục tiêu tài chính khác."
+    }
+  },
+  {
+    "input": "Mua sách kinh doanh 500k",
+    "output": {
+      "category": "Học tập",
+      "advice": "Đầu tư vào sách kinh doanh giúp bạn nâng cao kiến thức và kỹ năng. Hãy đọc kỹ và áp dụng vào thực tế."
+    }
+  },
+  {
+    "input": "Thanh toán tiền nước 300k",
+    "output": {
+      "category": "Nhà ở",
+      "advice": "Chi phí tiền nước là cần thiết. Hãy cân nhắc sử dụng nước tiết kiệm để giảm chi phí."
+    }
+  },
+  {
+    "input": "Mua khóa học tiếng Nhật 4 triệu",
+    "output": {
+      "category": "Học tập",
+      "advice": "Đầu tư vào việc học ngoại ngữ là một quyết định tốt. Hãy duy trì động lực học tập và thực hành đều đặn để tận dụng tối đa khóa học."
+    }
+  },
+  {
+    "input": "Đóng tiền internet 400k",
+    "output": {
+      "category": "Nhà ở",
+      "advice": "Internet là nhu cầu thiết yếu cho học tập và làm việc. So sánh các gói cước để chọn gói phù hợp với nhu cầu sử dụng."
+    }
+  },
+  {
+    "input": "Mua máy ảnh 12 triệu",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Nếu bạn có đam mê nhiếp ảnh hoặc cần cho công việc, đây là khoản đầu tư hợp lý. Hãy học cách sử dụng hiệu quả để tận dụng thiết bị."
+    }
+  },
+  {
+    "input": "Đi khám sức khỏe định kỳ 2.5 triệu",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Khám sức khỏe định kỳ là việc làm cần thiết. Hãy duy trì thói quen này để phát hiện sớm các vấn đề sức khỏe."
+    }
+  },
+  {
+    "input": "Mua đồ dùng văn phòng phẩm 350k",
+    "output": {
+      "category": "Học tập",
+      "advice": "Chi phí cho văn phòng phẩm là hợp lý. Hãy mua những món thực sự cần thiết và chất lượng tốt để sử dụng lâu dài."
+    }
+  },
+  {
+    "input": "Đăng ký khóa học nấu ăn 1.8 triệu",
+    "output": {
+      "category": "Học tập",
+      "advice": "Học nấu ăn không chỉ giúp bạn tự chăm sóc bản thân mà còn tiết kiệm chi phí ăn uống lâu dài. Hãy áp dụng kiến thức vào thực tế."
+    }
+  },
+  {
+    "input": "Mua giày thể thao 800k",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Giày thể thao tốt giúp bảo vệ sức khỏe khi tập luyện. Chọn sản phẩm phù hợp với môn thể thao bạn tham gia."
+    }
+  },
+  {
+    "input": "Thuê xe đi du lịch 1.5 triệu",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Chi phí thuê xe hợp lý cho chuyến du lịch. So sánh giá các đơn vị cho thuê và kiểm tra kỹ điều kiện thuê xe."
+    }
+  },
+  {
+    "input": "Mua thiết bị smart home 3.5 triệu",
+    "output": {
+      "category": "Nhà ở",
+      "advice": "Thiết bị smart home có thể giúp tiết kiệm điện và tăng tiện nghi. Hãy nghiên cứu kỹ tính năng và độ tương thích trước khi mua."
+    }
+  },
+  {
+    "input": "Đăng ký gói phần mềm đồ họa 6 triệu/năm",
+    "output": {
+      "category": "Công việc",
+      "advice": "Nếu bạn làm việc trong lĩnh vực đồ họa, đây là chi phí đầu tư cần thiết. Tận dụng tối đa các tính năng để tăng hiệu quả công việc."
+    }
+  },
+  {
+    "input": "Mua máy lọc không khí 5 triệu",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Đầu tư cho chất lượng không khí là việc làm cần thiết, đặc biệt trong môi trường đô thị. Hãy chọn máy có chứng nhận chất lượng và phù hợp với diện tích phòng."
+    }
+  },
+  {
+    "input": "Đăng ký khóa học piano 8 triệu",
+    "output": {
+      "category": "Học tập",
+      "advice": "Học nhạc cụ giúp phát triển não bộ và kỹ năng. Đảm bảo bạn có thời gian luyện tập đều đặn để không lãng phí khoản đầu tư này."
+    }
+  },
+  {
+    "input": "Mua bàn phím cơ 2.5 triệu",
+    "output": {
+      "category": "Công việc",
+      "advice": "Bàn phím chất lượng tốt giúp tăng hiệu suất làm việc và bảo vệ sức khỏe cổ tay. Chọn loại phù hợp với nhu cầu gõ phím của bạn."
+    }
+  },
+  {
+    "input": "Đóng phí bảo hiểm xe máy 800k",
+    "output": {
+      "category": "Phương tiện",
+      "advice": "Bảo hiểm xe là khoản chi bắt buộc và cần thiết. Nghiên cứu kỹ các gói bảo hiểm để chọn mức độ bảo vệ phù hợp."
+    }
+  },
+  {
+    "input": "Mua đồng phục công ty 1.2 triệu",
+    "output": {
+      "category": "Công việc",
+      "advice": "Đồng phục là khoản đầu tư cần thiết cho công việc. Chọn chất liệu tốt để đảm bảo độ bền và thoải mái khi mặc."
+    }
+  },
+  {
+    "input": "Đăng ký gói tập pilates 2.5 triệu",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Pilates giúp cải thiện sức khỏe và dáng người. Tham gia đều đặn các buổi tập để đạt hiệu quả tốt nhất."
+    }
+  },
+  {
+    "input": "Mua máy xay sinh tố 1.8 triệu",
+    "output": {
+      "category": "Nhà ở",
+      "advice": "Máy xay sinh tố giúp bạn tự làm đồ uống healthy tại nhà. Chọn công suất phù hợp với nhu cầu sử dụng."
+    }
+  },
+  {
+    "input": "Đóng tiền học thêm toán 900k",
+    "output": {
+      "category": "Học tập",
+      "advice": "Học thêm có thể giúp cải thiện kiến thức. Đảm bảo chọn giáo viên có chuyên môn tốt và phương pháp giảng dạy phù hợp."
+    }
+  },
+  {
+    "input": "Mua cây cảnh trang trí 700k",
+    "output": {
+      "category": "Nhà ở",
+      "advice": "Cây cảnh giúp không gian sống thêm sinh động. Tìm hiểu cách chăm sóc để cây phát triển tốt và bền lâu."
+    }
+  },
+  {
+    "input": "Đăng ký gói netflix 180k/tháng",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Dịch vụ stream phim là giải trí hợp lý. Cân nhắc chia sẻ tài khoản với gia đình để tối ưu chi phí."
+    }
+  },
+  {
+    "input": "Mua đèn học 450k",
+    "output": {
+      "category": "Học tập",
+      "advice": "Đèn học tốt giúp bảo vệ mắt khi học tập. Chọn đèn có độ sáng phù hợp và tính năng chống chói."
+    }
+  },
+  {
+    "input": "Đăng ký khóa học marketing 15 triệu",
+    "output": {
+      "category": "Học tập",
+      "advice": "Đây là khoản đầu tư lớn cho sự nghiệp. Nghiên cứu kỹ về chương trình học và đánh giá từ học viên trước đó."
+    }
+  },
+  {
+    "input": "Mua máy chạy bộ 12 triệu",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Máy chạy bộ giúp duy trì vận động tại nhà. Đảm bảo có không gian phù hợp và cam kết tập luyện đều đặn."
+    }
+  },
+  {
+    "input": "Đóng tiền sinh hoạt chung cư 1.5 triệu",
+    "output": {
+      "category": "Nhà ở",
+      "advice": "Đây là chi phí cố định hàng tháng. Kiểm tra kỹ các khoản phí để đảm bảo tính minh bạch."
+    }
+  },
+  {
+    "input": "Mua ghế massage 18 triệu",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Ghế massage là khoản đầu tư lớn. Cân nhắc nhu cầu sử dụng thực tế và không gian đặt ghế trước khi mua."
+    }
+  },
+  {
+    "input": "Đăng ký gói data 4G 200k/tháng",
+    "output": {
+      "category": "Công việc",
+      "advice": "Data di động là nhu cầu thiết yếu. So sánh các gói cước để chọn dung lượng phù hợp với nhu cầu."
+    }
+  },
+  {
+    "input": "Mua áo mưa 120k",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Áo mưa là vật dụng cần thiết. Chọn loại chất lượng tốt để sử dụng được lâu dài."
+    }
+  },
+  {
+    "input": "Đăng ký học bơi 2 triệu",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Biết bơi vừa tốt cho sức khỏe vừa đảm bảo an toàn. Chọn HLV có chuyên môn tốt để học đúng kỹ thuật."
+    }
+  },
+  {
+    "input": "Mua bình giữ nhiệt 500k",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Bình giữ nhiệt giúp tiết kiệm chi phí mua đồ uống bên ngoài. Chọn thương hiệu uy tín để đảm bảo an toàn sức khỏe."
+    }
+  },
+  {
+    "input": "Đóng tiền phòng gym 6 tháng 5 triệu",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Đăng ký dài hạn giúp tiết kiệm chi phí. Lập kế hoạch tập luyện để tận dụng tối đa gói tập."
+    }
+  },
+  {
+    "input": "Mua váy dự tiệc 1.5 triệu",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Chọn trang phục phù hợp với nhiều dịp để tối ưu chi phí. Cân nhắc thuê nếu chỉ mặc một lần."
+    }
+  },
+  {
+    "input": "Đăng ký khóa học photoshop 3 triệu",
+    "output": {
+      "category": "Học tập",
+      "advice": "Kỹ năng chỉnh sửa ảnh rất hữu ích cho công việc. Thực hành nhiều để nắm vững các kỹ thuật đã học."
+    }
+  },
+  {
+    "input": "Mua nồi cơm điện 2 triệu",
+    "output": {
+      "category": "Nhà ở",
+      "advice": "Nồi cơm điện tốt giúp tiết kiệm thời gian nấu nướng. Chọn dung tích phù hợp với số người sử dụng."
+    }
+  },
+  {
+    "input": "Đóng tiền trả góp xe 3 triệu/tháng",
+    "output": {
+      "category": "Phương tiện",
+      "advice": "Trả góp cần được lên kế hoạch chi tiết. Đảm bảo có nguồn thu ổn định để trả nợ đúng hạn."
+    }
+  },
+  {
+    "input": "Mua bàn ủi hơi nước 1.2 triệu",
+    "output": {
+      "category": "Nhà ở",
+      "advice": "Bàn ủi chất lượng tốt giúp quần áo bền đẹp. Học cách sử dụng đúng để tránh làm hỏng quần áo."
+    }
+  },
+  {
+    "input": "Đăng ký khóa học guitar 1.5 triệu",
+    "output": {
+      "category": "Học tập",
+      "advice": "Học nhạc cụ giúp giải tỏa stress hiệu quả. Mua hoặc thuê đàn phù hợp để tập luyện tại nhà."
+    }
+  },
+  {
+    "input": "Mua vé tháng xe buýt 200k",
+    "output": {
+      "category": "Phương tiện",
+      "advice": "Sử dụng phương tiện công cộng giúp tiết kiệm chi phí và bảo vệ môi trường. Tận dụng thời gian di chuyển để đọc sách hoặc học thêm."
+    }
+  },
+  {
+    "input": "Đóng phí thẻ tín dụng 700k/năm",
+    "output": {
+      "category": "Tài chính",
+      "advice": "Phí thẻ tín dụng là chi phí định kỳ. So sánh quyền lợi các loại thẻ để chọn gói phù hợp nhất."
+    }
+  },
+  {
+    "input": "Mua đồng hồ thông minh 4.5 triệu",
+    "output": {
+      "category": "Công nghệ",
+      "advice": "Đồng hồ thông minh giúp theo dõi sức khỏe và hoạt động. Tìm hiểu kỹ các tính năng để tận dụng tối đa thiết bị."
+    }
+  },
+  {
+    "input": "Đăng ký gói bảo dưỡng xe 900k",
+    "output": {
+      "category": "Phương tiện",
+      "advice": "Bảo dưỡng định kỳ giúp xe hoạt động ổn định và an toàn. Chọn garage uy tín để đảm bảo chất lượng dịch vụ."
+    }
+  },
+  {
+    "input": "Mua iPhone 15 Pro Max 45 triệu",
+    "output": {
+      "category": "Công nghệ",
+      "advice": "Ơ hay! Thận của bạn còn nguyên đấy chứ? Với số tiền này có thể mua được 4500 bát phở! Nhưng đã chi thì đừng để thành cục gạch đắt tiền nhé, nhớ mua ốp lưng với cường lực vào!"
+    }
+  },
+  {
+    "input": "Đi nhậu với đồng nghiệp 2 triệu",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Ầy ầy, lương chưa về mà đã bay 2 triệu rồi! Nhớ uống có người thân đưa về, chứ đừng để công an họ đưa về nha!"
+    }
+  },
+  {
+    "input": "Mua đồ hiệu LV 35 triệu",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Ui trời! Số tiền này đủ mua 700 bộ quần áo bình dân rồi đấy! Mà thôi, đã ham hố thì nhớ check mã QR cẩn thận kẻo lại xách túi 'LuôngVuông' về nhé!"
+    }
+  },
+  {
+    "input": "Đi spa làm đẹp 5 triệu",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Ôi! Đắp mặt nạ vàng hay gì mà ghê thế? Mà thôi, tiền bạn cũng như nước trong spa ấy, cứ chảy ào ào!"
+    }
+  },
+  {
+    "input": "Mua vé concert BLACKPINK 8 triệu",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Ủa rồi sau concert có được gặp riêng Lisa không mà xót tiền thế? Đã đam mê thì được, nhưng tháng sau đừng có kêu mì gói nhạt quá nhé!"
+    }
+  },
+  {
+    "input": "Đặt cọc du lịch Châu Âu 50 triệu",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Chà chà! Định đi gặp Ronaldo à? Số tiền này thuê nguyên xe bus đi Vũng Tàu được 20 chuyến đấy! Mà thôi, đi thì đi, nhớ chụp nhiều ảnh để đăng Facebook 'flex' cho đáng tiền nhé!"
+    }
+  },
+  {
+    "input": "Mua giày sneaker limited edition 15 triệu",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Ủa mua giày hay mua cả nhà máy sản xuất vậy? Mà đã mua thì nhớ đi cẩn thận, vướng cọng cỏ là 'đau tim' đấy!"
+    }
+  },
+  {
+    "input": "Nâng cấp PC gaming 30 triệu",
+    "output": {
+      "category": "Công nghệ",
+      "advice": "Máy tính gì mà đắt bằng 6 tháng tiền nhà! Mà đã 'đầu tư' thế này thì nhớ kiếm người yêu online cho đỡ phí nhé!"
+    }
+  },
+  {
+    "input": "Mua đồng hồ Rolex 200 triệu",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "TRỜI ƠI! Cả cái nhà tôi đang ở còn rẻ hơn cái đồng hồ này! Thôi, đã đeo thì nhớ đi đường tối cũng phải bật đèn flash để người ta thấy nhé!"
+    }
+  },
+  {
+    "input": "Mua mèo Anh lông ngắn 15 triệu",
+    "output": {
+      "category": "Thú cưng",
+      "advice": "Mèo gì mà đắt bằng 3 con trâu! Thế này thì phải cho nó ăn cá hồi, uống sữa tươi organic mỗi ngày cho xứng đáng!"
+    }
+  },
+  {
+    "input": "Đăng ký học tiếng Anh 25 triệu",
+    "output": {
+      "category": "Học tập",
+      "advice": "Với giá này thì phải nói tiếng Anh chuẩn hơn cả Queen Elizabeth! Đùa thế thôi, cố học nhé, chứ không là tiền mất tật mang!"
+    }
+  },
+  {
+    "input": "Mua bàn phím cơ custom 8 triệu",
+    "output": {
+      "category": "Công nghệ",
+      "advice": "Bàn phím gì mà đắt hơn cả điện thoại tôi đang xài! Mỗi lần gõ phải nghe 'tick tack' cho sướng tai nhé!"
+    }
+  },
+  {
+    "input": "Mua set nồi Zwilling 12 triệu",
+    "output": {
+      "category": "Nhà ở",
+      "advice": "Nồi niêu gì mà đắt thế! Nấu món gì cũng phải ngon hơn nhà hàng 5 sao đấy nhé, không thì phí của giời!"
+    }
+  },
+  {
+    "input": "Mua vé máy bay hạng thương gia 40 triệu",
+    "output": {
+      "category": "Du lịch",
+      "advice": "Ghế máy bay giá này mà không tự động massage thì phí! Mà đã xài sang thế này thì đừng có lên máy bay mặc đồ bộ đấy nhé!"
+    }
+  },
+  {
+    "input": "Thuê villa Đà Lạt 15 triệu/đêm",
+    "output": {
+      "category": "Du lịch",
+      "advice": "Ủa thuê villa hay mua đứt mảnh đất vậy? Mà đã thuê thì nhớ chụp ảnh mọi góc để đăng check-in, không thì tiếc lắm!"
+    }
+  },
+  {
+    "input": "Mua sofa da 45 triệu",
+    "output": {
+      "category": "Nhà ở",
+      "advice": "Da bò này chắc được matxa hàng ngày! Mà thôi, đã mua thì cấm ai ngồi, để đấy ngắm cho đỡ tiếc tiền!"
+    }
+  },
+  {
+    "input": "Mua cardigan len 5 triệu",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Len gì mà đắt thế, được mấy chú cừu xoa bóp trước khi dệt à? Mà đã mua thì phải mặc quanh năm cho đáng tiền nhé!"
+    }
+  },
+  {
+    "input": "Đăng ký tập gym với PT 8 triệu/tháng",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "PT này chắc là con trai The Rock hay gì? Mà đã chi nhiều thế thì đừng có tập vài buổi rồi nghỉ đấy nhé!"
+    }
+  },
+  {
+    "input": "Mua Macbook Pro 16 inch 65 triệu",
+    "output": {
+      "category": "Công nghệ",
+      "advice": "Máy tính gì mà đắt bằng một căn trọ ở quê! Nhớ dùng để làm việc chứ đừng chỉ để lướt Facebook thôi đấy!"
+    }
+  },
+  {
+    "input": "Mua nước hoa 10 triệu",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Chai nước gì mà đắt thế, trong này có tinh chất nàng tiên à? Xịt một lần là phải có người yêu liền đấy nhé!"
+    }
+  },
+  {
+    "input": "Đi bar với bạn 6 triệu",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Một đêm bay bằng nửa tháng lương! Sáng mai tỉnh dậy nhớ đừng khóc khi nhìn ví nhé!"
+    }
+  },
+  {
+    "input": "Mua PS5 kèm 5 game 20 triệu",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Chơi game kiểu này thì gia đình sắp có drama rồi! Nhớ canh giờ chơi game kẻo vợ/chồng cho ra đảo ngủ đấy!"
+    }
+  },
+  {
+    "input": "Mua áo phông Gucci 15 triệu",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Áo phông gì mà đắt bằng 100 cái áo thường! Mặc ra đường nhớ tránh xa mấy vũng nước nhé, dây vào là khóc!"
+    }
+  },
+  {
+    "input": "Đặt bàn nhà hàng Michelin 10 triệu/người",
+    "output": {
+      "category": "Ăn uống",
+      "advice": "Với giá này thì đầu bếp phải ra tận bàn đút cho mình ăn! Mà nhớ chụp ảnh đồ ăn thật nghệ thuật rồi review cho thiên hạ biết với nhé!"
+    }
+  },
+  {
+    "input": "Mua bộ golf 100 triệu",
+    "output": {
+      "category": "Thể thao",
+      "advice": "Trời! Gậy golf này chắc được dát vàng? Mà đã chơi sang thế này thì phải đánh trúng bóng đấy nhé, không thì mang tiếng 'nhà giàu học golf'!"
+    }
+  },
+  {
+    "input": "Mua máy ảnh mirrorless 85 triệu",
+    "output": {
+      "category": "Công nghệ",
+      "advice": "Máy ảnh này chắc tự biết bay để chụp ảnh! Mà đã mua thì đừng để chế độ auto nữa nhé, phải chỉnh manual mới xứng tầm!"
+    }
+  },
+  {
+    "input": "Đi làm răng sứ 120 triệu",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Răng gì mà đắt bằng cả căn nhà! Từ giờ ăn gì cũng phải cười thật tươi để khoe răng cho thiên hạ chiêm ngưỡng nhé!"
+    }
+  },
+  {
+    "input": "Mua xe máy điện VinFast 90 triệu",
+    "output": {
+      "category": "Phương tiện",
+      "advice": "Xe máy điện mà đắt hơn cả xe tay ga xăng! Nhớ sạc pin đầy đủ kẻo 'sống chết mặc bay' giữa đường nhé!"
+    }
+  },
+  {
+    "input": "Đặt cọc mua nhà 500 triệu",
+    "output": {
+      "category": "Bất động sản",
+      "advice": "Úi giời! Số tiền này đủ mua 5000 tô phở! Mà thôi, có nhà rồi thì nhớ sống tốt, đừng để hàng xóm nói 'nhà mới người ta sinh sự' nhé!"
+    }
+  },
+  {
+    "input": "Đầu tư bitcoin 200 triệu",
+    "output": {
+      "category": "Đầu tư",
+      "advice": "Ôi! Đánh bạc hay đầu tư đây? Thôi thì chúc bạn sớm thành tỷ phú, mà nhớ đừng có ngồi F5 xem giá cả ngày đấy!"
+    }
+  },
+  {
+    "input": "Mua smartwatch theo dõi sức khỏe 3 triệu",
+    "output": {
+      "category": "Công nghệ",
+      "advice": "Mua đồng hồ thông minh mà đừng để IQ tụt nhé! Nhớ đi bộ đủ 10,000 bước mỗi ngày chứ đừng để nó báo 'Ơ sao hôm nay lười thế?'"
+    }
+  },
+  {
+    "input": "Đóng học phí lớp nấu ăn Ý 4 triệu",
+    "output": {
+      "category": "Học tập",
+      "advice": "Học nấu ăn Ý để về nhà nấu mì gói thêm phô mai à? Đùa thôi, nhớ thực hành nhiều để khỏi phí tiền học nhé!"
+    }
+  },
+  {
+    "input": "Mua quần áo em bé 2 triệu",
+    "output": {
+      "category": "Mua sắm",
+      "advice": "Con nít lớn nhanh lắm, tháng sau là không mặc vừa đâu. Nhớ chọn đồ thoải mái, dễ giặt và không quá đắt nhé!"
+    }
+  },
+  {
+    "input": "Đăng ký gói detox 7 ngày 1.5 triệu",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Detox xong nhớ đừng ăn buffet 'trả thù' nhé! Giữ chế độ ăn uống lành mạnh mới quan trọng."
+    }
+  },
+  {
+    "input": "Mua bình nước hydrogen 8 triệu",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Bình nước 8 triệu mà không biến thành người Sắt thì hơi phí đấy! Nhớ uống đều đặn cho xứng đáng với số tiền bỏ ra."
+    }
+  },
+  {
+    "input": "Đặt vé máy bay về quê 2.5 triệu",
+    "output": {
+      "category": "Di chuyển",
+      "advice": "Về quê thì nên mua vé sớm để tiết kiệm. Mà nhớ mua quà cho người thân, không thì bị chê 'đi làm thành phố mà keo kiệt' đấy!"
+    }
+  },
+  {
+    "input": "Mua máy rửa bát 12 triệu",
+    "output": {
+      "category": "Gia dụng",
+      "advice": "Máy rửa bát đắt thế này thì phải tự biết nấu ăn nữa chứ! Đầu tư vào việc nhà thông minh là tốt, miễn là thật sự dùng được."
+    }
+  },
+  {
+    "input": "Đăng ký khóa học đầu tư 35 triệu",
+    "output": {
+      "category": "Học tập",
+      "advice": "Học phí đắt thế này thì sau khóa học phải giàu gấp đôi Warren Buffett nhé! Nhớ tìm hiểu kỹ về giảng viên và nội dung khóa học."
+    }
+  },
+  {
+    "input": "Mua robot hút bụi 8 triệu",
+    "output": {
+      "category": "Gia dụng",
+      "advice": "Con robot này phải biết nấu cơm luôn thì mới đáng tiền! Đùa thôi, thiết bị thông minh giúp tiết kiệm thời gian là điều đáng giá."
+    }
+  },
+  {
+    "input": "Đóng phí câu lạc bộ golf 200 triệu/năm",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Với mức phí này thì đánh golf phải chuẩn như Tiger Woods! Networking quan trọng nhưng đừng quên việc nhà nhé!"
+    }
+  },
+  {
+    "input": "Mua lò nướng bánh 5 triệu",
+    "output": {
+      "category": "Gia dụng",
+      "advice": "Mua lò nướng về làm bánh bán online phải không? Nhớ tập làm nhiều vào, đừng để thành đồ trang trí nhà bếp!"
+    }
+  },
+  {
+    "input": "Đăng ký gói massage 10 buổi 5 triệu",
+    "output": {
+      "category": "Sức khỏe",
+      "advice": "Massage cho khỏe người chứ đừng xoa dịu nỗi đau về tiền nhé! Sức khỏe là vốn quý, đầu tư đúng đắn!"
+    }
+  },
+  {
+    "input": "Mua bộ bàn ghế sofa 40 triệu",
+    "output": {
+      "category": "Nội thất",
+      "advice": "Sofa đắt thế này thì phải nằm êm hơn giường mới được! Nhớ bảo quản cẩn thận, đừng để mèo cào hay chó gặm."
+    }
+  },
+  {
+    "input": "Đóng tiền trường mầm non 8 triệu/tháng",
+    "output": {
+      "category": "Giáo dục",
+      "advice": "Học phí cao thế này thì cháu phải biết nói 3 thứ tiếng khi tốt nghiệp! Đầu tư cho con cái là không bao giờ phí."
+    }
+  },
+  {
+    "input": "Mua máy chạy bộ điện 25 triệu",
+    "output": {
+      "category": "Thể thao",
+      "advice": "Nhớ chạy đều đặn nhé, đừng để thành giá phơi đồ sang chảnh! Tập luyện tại nhà tiện lợi nhưng cần kỷ luật cao."
+    }
+  },
+  {
+    "input": "Mua bếp từ âm 15 triệu",
+    "output": {
+      "category": "Gia dụng",
+      "advice": "Bếp đắt thế này thì món ăn phải ngon như nhà hàng 5 sao! Đầu tư vào bếp núc là đầu tư vào hạnh phúc gia đình."
+    }
+  },
+  {
+    "input": "Đăng ký gói netflix cả năm 1.5 triệu",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Xem Netflix cả năm mà đừng bỏ bê công việc nhé! Chia sẻ tài khoản với gia đình để tối ưu chi phí."
+    }
+  },
+  {
+    "input": "Mua máy lọc nước RO 12 triệu",
+    "output": {
+      "category": "Gia dụng",
+      "advice": "Nước phải sạch như nước suối nguồn mới xứng đáng! Định kỳ thay lõi lọc đúng hạn để đảm bảo chất lượng."
+    }
+  },
+  {
+    "input": "Đăng ký gói bảo hiểm sức khỏe gia đình 30 triệu/năm",
+    "output": {
+      "category": "Bảo hiểm",
+      "advice": "Đầu tư cho sức khỏe là không bao giờ thừa. Nhớ đọc kỹ điều khoản và quyền lợi được bảo hiểm nhé!"
+    }
+  },
+  {
+    "input": "Mua bộ dụng cụ tập gym tại nhà 15 triệu",
+    "output": {
+      "category": "Thể thao",
+      "advice": "Tập gym tại nhà mà đừng để thành kho chứa đồ nhé! Lên lịch tập luyện khoa học và kiên trì thực hiện."
+    }
+  },
+  {
+    "input": "Đặt tiệc sinh nhật con 20 triệu",
+    "output": {
+      "category": "Giải trí",
+      "advice": "Tiệc sinh nhật to thế này thì con phải ngoan cả năm đấy nhé! Quan trọng là tạo kỷ niệm đẹp chứ không phải số tiền."
+    }
+  },
+  {
+    "input": "Mua tủ đông bảo quản thực phẩm 18 triệu",
+    "output": {
+      "category": "Gia dụng",
+      "advice": "Tủ đông to thế này chắc định mở tiệm đông lạnh! Mua đồ ăn số lượng lớn để tiết kiệm thì tốt đấy."
+    }
+  },
+  {
+    "input": "Đăng ký học võ 6 tháng 10 triệu",
+    "output": {
+      "category": "Thể thao",
+      "advice": "Học võ để tự vệ chứ đừng để đi gây sự nhé! Rèn luyện thể chất và tinh thần là việc đáng làm."
+    }
+  },
+  {
+    "input": "Mua máy giặt sấy cao cấp 22 triệu",
+    "output": {
+      "category": "Gia dụng",
+      "advice": "Máy giặt đắt thế này thì quần áo phải tự biết gấp mới được! Công nghệ tốt sẽ giúp quần áo bền đẹp hơn."
+    }
+  },
+  {
+    "input": "Đóng tiền học thêm toán cho con 3 triệu/tháng",
+    "output": {
+      "category": "Giáo dục",
+      "advice": "Con học thêm toán mà sau này làm nghệ sĩ thì sao? Đùa thôi, đầu tư cho tri thức không bao giờ uổng phí!"
+    }
+  },
+  {
+    "input": "Mua bộ chăn ga gối đệm 15 triệu",
+    "output": {
+      "category": "Nội thất",
+      "advice": "Đệm đắt thế này thì ngủ phải ngon hơn công chúa nhé! Giấc ngủ ngon là chìa khóa của sức khỏe tốt."
+    }
+  },
+  {
+    "input": "Đặt tour du lịch châu Âu 2 người 150 triệu",
+    "output": {
+      "category": "Du lịch",
+      "advice": "Đi châu Âu mà về không biết nói câu nào tiếng Pháp thì phí! Trải nghiệm đáng giá, nhưng nhớ chụp thật nhiều ảnh."
+    }
+  },
+  {
+    "input": "Mua bàn học thông minh cho con 8 triệu",
+    "output": {
+      "category": "Nội thất",
+      "advice": "Bàn học thông minh mà điểm số không thông minh thì sao? Trang bị tốt cho con là điều nên làm, nhưng cần kèm cặp."
+    }
+  },
+  {
+    "input": "Đăng ký khóa học piano 1 năm 45 triệu",
+    "output": {
+      "category": "Nghệ thuật",
+      "advice": "Học piano đắt thế này thì về nhà phải chơi được cả Beethoven! Theo đuổi đam mê nghệ thuật cần kiên trì và đầu tư."
+    }
+  },
+  {
+    "input": "Mua máy tính bảng cho con học online 12 triệu",
+    "output": {
+      "category": "Công nghệ",
+      "advice": "Mua máy tính bảng học online mà lại dùng để chơi game thì.. thôi kệ, miễn là điểm tốt là được!"
+    }
+  }
+]  
