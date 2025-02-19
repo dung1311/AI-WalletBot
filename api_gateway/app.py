@@ -4,6 +4,7 @@ from jwt.exceptions import InvalidTokenError
 from dotenv import load_dotenv
 import os
 import json
+import requests
 
 from chatbot_service.app import ask
 
@@ -57,3 +58,13 @@ async def askAI(req: Request):
         "metadata": response
     }, ensure_ascii=False))
     
+@app.get("/call")
+async def call(req: Request):
+    token = req.headers.get("Authorization")
+    url = "http://localhost:3000/v1/api/index"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {token}"
+    }
+    response = requests.get(url, headers=headers)
+    return response.text
