@@ -7,6 +7,8 @@ import json
 import requests
 
 from chatbot_service.app import ask
+from function_calling_service import response_AI
+from function_calling_service.register import FunctionRegistry
 
 load_dotenv()
 
@@ -40,8 +42,8 @@ app = FastAPI()
 def index():
     return "Hello world"
 
-@app.post("/ask")
-async def askAI(req: Request):
+@app.post("/chat")
+async def chat(req: Request):
     data = await req.json()
     query = data['query']
     if not query:
@@ -59,13 +61,20 @@ async def askAI(req: Request):
         "metadata": json_response
     }
     
-@app.get("/call")
-async def call(req: Request):
-    token = req.headers.get("Authorization")
-    url = "http://localhost:3000/v1/api/index"
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {token}"
+@app.post("/ask")
+async def askAI(req: Request):
+    data = await req.json()
+    query = data['query']
+    if not query:
+        return Response(status_code=400, content=json.dumps({
+            "code": 400,
+            "message": "Query is required",
+            "metadata": None
+        }))
+    response = await response_AI(query, req)
+    # json_response = json.loads(response)
+    return {
+        "code": 200,
+        "message": "Recieved response",
+        "metadata": response
     }
-    response = requests.get(url, headers=headers)
-    return response.text

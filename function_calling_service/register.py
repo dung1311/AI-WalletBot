@@ -1,18 +1,19 @@
 from typing import Dict, Callable, Any, List
-from models import Function
+from function_calling_service.models import Function
 from ollama import Client, ChatResponse
 import inspect
 import json
 import re
 import os
 from dotenv import load_dotenv
+from fastapi import Request
 
 load_dotenv()
 
 class FunctionRegistry:
     def __init__(self):
         self.functions: Dict[str, Function] = {}  # Initialize the dictionary
-        self.client = Client(host=f"{os.getenv("OLLAMA_HOST")}:{os.getenv("OLLAMA_PORT")}")
+        self.client = Client(host=f"http://localhost:11434")
     
     def register(self, name: str, description: str, parameters: dict = None, required: List = []):
         def decorator(func: Callable):
@@ -93,7 +94,7 @@ class FunctionRegistry:
         
         return function_calls
 
-    async def process_query(self, query: str, model: str = "qwen2.5:7b") -> str:
+    async def process_query(self, query: str, req: Request, model: str = "qwen2.5:7b") -> str:
         system_prompt = f"""You are a helpful assistant that can call functions.
 
         When you need to call a function, use the format:
@@ -121,11 +122,18 @@ class FunctionRegistry:
         results = []
         
         for call in function_calls:
+            # check if the function requires the request object
+            func_name = call["name"]
+            if func_name in self.functions:
+                func_params = inspect.signature(self.functions[func_name].function).parameters
+                if "req" in func_params:
+                    call["parameters"]["req"] = req
+
             try:
                 result = self.execute_function(call["name"], call["parameters"])
                 results.append(f"{result}")
             except Exception as e:
                 results.append(f"Error executing {call['name']}: {str(e)}")
 
-        return "\n".join([response.message.content] + results)
+        return results
     

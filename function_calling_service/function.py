@@ -1,6 +1,8 @@
 from typing import Callable
-from register import FunctionRegistry
+from function_calling_service.register import FunctionRegistry
 import requests
+from fastapi import Request
+import json
 
 registry = FunctionRegistry()
 
@@ -45,5 +47,30 @@ def get_weather(location: str, unit: str = "C") -> str:
 )
 def get_area(width: float, height: float) -> float:
     return width*height
+
+@registry.register(
+        name="function.get_all_expenses",
+        description="Get all expenses of a user",
+        parameters={
+            "type": "object",
+            "properties": {
+                "req": {
+                    "type": "Request",
+                    "description": "Request object of FastAPI"
+                }
+            }
+        },
+        required=[]
+)
+def get_all_expenses(req: Request):
+    accessToken = req.headers.get("Authorization")
+    headers = {
+        "Content-Type": "application/json",
+        'Authorization': f'Bearer {accessToken}'
+    }
+
+    response = requests.get(f"http://localhost:3000/expense/get-expense", headers=headers)
+    
+    return response
 
 
