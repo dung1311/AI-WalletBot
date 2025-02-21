@@ -71,6 +71,6 @@ def get_all_expenses(req: Request):
 
     response = requests.get(f"http://localhost:3000/expense/get-expense", headers=headers)
     
-    return response
+    return response.json()
 
 
