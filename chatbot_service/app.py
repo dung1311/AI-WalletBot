@@ -1,5 +1,6 @@
 from ollama import chat, ChatResponse, AsyncClient
-<<<<<<< HEAD
+import json
+
 prompt = {
     "humor": "You are a person who is positive, optimistic, and good for mental resilience. You make jokes and keep conversations lighthearted.",
     
@@ -21,22 +22,6 @@ prompt = {
     
     "friendly": "You are like a close friend, always ready to chat, joke, and provide casual yet thoughtful advice."
 }
-=======
->>>>>>> dev
-
-async def ask(query: str):
-    print("running!!!")
-    promt = {
-                'role': 'system', 
-                'content': 'You only understand Vietnamese, say \"Tôi không hiểu\" if there are someone speak language which is not Vietnamese. Response in Vietnamese'
-            }
-<<<<<<< HEAD
-    response = await AsyncClient().chat(model='llama3.2:3b', messages=[promt, {
-                  'role': 'user', 
-                  'content': f'{query}'
-            }])
-    print("finish!!!")
-    return response.message.content
 
 class Model:
     def __init__(self, personality: str):
@@ -57,7 +42,7 @@ class Model:
             "role": "system",
             "content": f"""{self.personality} You only understand Vietnamese. If someone speaks a different language, respond with 'Tôi không hiểu.' Response in Vietnamese.
             Your task is to:
-            Extract the amount of money spent (in numbers).
+            Extract the amount of money spent (in numbers). Example: 1000, 5000, 1000000.
             Categorize the spending into one of these categories: ["ăn uống", "mua sắm", "học tập","sức khỏe","công việc","khác"].
             Provide advice based on the spending.
             Return a JSON object with: "amount", "category", and "advice".
@@ -88,24 +73,3 @@ class Model:
 
         print("AI response completed!")
         return json.dumps(result, ensure_ascii=False, indent=4)
-=======
-    test = {
-        'role': 'system',
-        'content': '''
-        Please extract the following information from the given text and return it as a JSON object:
-
-        amount: the amount of money in the text. Return number only, example: 1000, 1000000, 1000000000
-        description: copy the given text
-        category: the category of the given text. Return string only, example: 'food', 'drink', 'transport', 'shopping', 'entertainment', 'health', 'education', 'other'
-        advice: the advice for the amount of money in the text. Return string only. always complain about the money spent. Translate into Vietnamese
-
-        Return amount, description, category, advice in a JSON object. Remember only response in Vietnamese
-    '''
-    }
-    response = await AsyncClient().chat(model='qwen2.5:7b', messages=[test, {
-                  'role': 'user', 
-                  'content': f'{query}'
-            }], format='json')
-    print("finish!!!")
-    return response.message.content
->>>>>>> dev

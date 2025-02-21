@@ -94,6 +94,19 @@ class FunctionRegistry:
         
         return function_calls
 
+    def summarize_response(self, text, model: str = "qwen2.5:7b"):
+        response = self.client.chat(
+            model="qwen2.5:7b",
+            messages=[{
+                "role": "system",
+                "content": "Summarize response in a few sentences. Response include amount, category, and name of expense. Response in Vietnamese."
+            }, {
+                "role": "user",
+                "content": text
+            }]
+        )
+
+        return response.message.content
     async def process_query(self, query: str, req: Request, model: str = "qwen2.5:7b") -> str:
         system_prompt = f"""You are a helpful assistant that can call functions.
 
@@ -128,12 +141,19 @@ class FunctionRegistry:
                 func_params = inspect.signature(self.functions[func_name].function).parameters
                 if "req" in func_params:
                     call["parameters"]["req"] = req
-
             try:
                 result = self.execute_function(call["name"], call["parameters"])
                 results.append(f"{result}")
             except Exception as e:
                 results.append(f"Error executing {call['name']}: {str(e)}")
+        
+        descriptions = []
+        for result in results:
+            print(result)
+            description = result.get("description", "")
+            descriptions.append(description)
 
-        return results
+        results_str = str(descriptions)
+        return self.summarize_response(results_str)
+
     
