@@ -95,18 +95,25 @@ class FunctionRegistry:
         return function_calls
 
     def summarize_response(self, text, model: str = "qwen2.5:7b"):
+        print("Get summary")
         response = self.client.chat(
-            model="qwen2.5:7b",
+            model=model,
             messages=[{
                 "role": "system",
-                "content": "Summarize response in a few sentences. Response include amount, category, and name of expense. Response in Vietnamese."
+                "content": """Bạn là một trợ lý hữu ích trong tài chính. Bạn hãy dựa vào tin nhắn của người dùng, sau đó đưa ra tóm tắt ngắn gọn từ 1 đến 2 câu bằng tiếng Việt.
+                    Trả về định dạng json như sau:
+                    summary: đây chính là phần tóm tắt 
+
+                    Hãy đảm bảo phản hồi bằng tiếng Việt. 
+                """
             }, {
                 "role": "user",
                 "content": text
-            }]
+            }],
+            format="json"
         )
 
-        return response.message.content
+        return json.loads(response.message.content)
     async def process_query(self, query: str, req: Request, model: str = "qwen2.5:7b") -> str:
         system_prompt = f"""You are a helpful assistant that can call functions.
 
@@ -115,7 +122,7 @@ class FunctionRegistry:
 
         You can call multiple functions if needed.
         """
-    
+        print("Chat with AI")
         response = self.client.chat(
             model=model,
             messages=[
@@ -133,7 +140,7 @@ class FunctionRegistry:
         
         function_calls = self.get_info(response)
         results = []
-        
+        print(function_calls)
         for call in function_calls:
             # check if the function requires the request object
             func_name = call["name"]
@@ -147,13 +154,15 @@ class FunctionRegistry:
             except Exception as e:
                 results.append(f"Error executing {call['name']}: {str(e)}")
         
-        descriptions = []
-        for result in results:
-            print(result)
-            description = result.get("description", "")
-            descriptions.append(description)
-
-        results_str = str(descriptions)
-        return self.summarize_response(results_str)
+        # descriptions = []
+        # for result in results:
+        #     json_result = json.loads(result)
+        #     description = json_result.description
+        #     descriptions.append(description)
+        # results_str = str(descriptions)
+        # print(results_str)
+        # print(results)
+        result_str = str(results)
+        return self.summarize_response(result_str)
 
     
