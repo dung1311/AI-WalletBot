@@ -3,6 +3,11 @@ from function_calling_service.register import FunctionRegistry
 import requests
 from fastapi import Request
 import json
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+URL = os.getenv("NODE_URL") 
 
 registry = FunctionRegistry()
 
@@ -69,7 +74,7 @@ def get_all_expenses(req: Request):
         'Authorization': f'Bearer {accessToken}'
     }
 
-    response = requests.get(f"http://localhost:3000/expense/get-expense", headers=headers)
+    response = requests.get(f"{URL}/get-expense", headers=headers)
     
     return response.json()
 
