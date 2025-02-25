@@ -5,7 +5,9 @@ from fastapi import Request
 import json
 import os
 from dotenv import load_dotenv
+from datetime import date
 load_dotenv()
+
 
 URL = os.getenv("NODE_URL") 
 
@@ -78,4 +80,42 @@ def get_all_expenses(req: Request):
     
     return response.json()
 
+@registry.register(
+    name="function.get_expense_by_amount",
+    description=f"""Get list of expenses with specific amount and sinceBy day.""",
+    parameters={
+        "type": "object",
+        "properties": {
+            "req": {
+                "type": "Request",
+                "description": "Request object of FastAPI"
+            },
+            "amount": {
+                "type": "float",
+                "description": "Amount. Round to 5th digit after decimal point. Example 50.66666666 will be 50.66667, 50.00000 will be 50.00000"
+            },
+            "sinceBy": {
+                "type": "date",
+                "description": "Start day to query. Format is year-month-date. If not specific default is 2025-01-01",
+                "default": "2025-01-01"
+            }
+        }
+    },
+    required=["amount"]
+)
+def get_expense_by_amount(req: Request, amount: float, sinceBy: date):
+    accessToken = req.headers.get("Authorization")
+    headers = {
+        "Content-Type": "application/json",
+        'Authorization': f'Bearer {accessToken}'
+    }
+    print(amount)
+    print(type(amount))
+    params = {
+        "amount": amount,
+        "sinceBy": sinceBy
+    }
+    response = requests.get(f"{URL}/get-expense", headers=headers, params=params)
+    
+    return response.json()    
 

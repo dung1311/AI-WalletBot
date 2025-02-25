@@ -146,6 +146,7 @@ class FunctionRegistry:
             func_name = call["name"]
             if func_name in self.functions:
                 func_params = inspect.signature(self.functions[func_name].function).parameters
+                print(func_params)
                 if "req" in func_params:
                     call["parameters"]["req"] = req
             try:
