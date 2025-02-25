@@ -5,10 +5,12 @@ from dotenv import load_dotenv
 import os
 import json
 import requests
+from datetime import date
 
 from chatbot_service.chat import Model
 from function_calling_service import response_AI
 from function_calling_service.register import FunctionRegistry
+from function_calling_service.function import get_expense_by_amount
 
 load_dotenv()
 
@@ -82,3 +84,31 @@ async def askAI(req: Request):
         "message": "Recieved response",
         "metadata": response
     }
+
+@app.get("/test")
+def test(req: Request):
+    accessToken = req.headers.get("Authorization")
+    headers = {
+        "Content-Type": "application/json",
+        'Authorization': f'Bearer {accessToken}'
+    }
+
+    params = {
+        "option": -1
+    }
+
+    response = requests.get(f"http://localhost:3000/expense/sortPartner", headers=headers, params=params)
+
+    response_json = response.json()
+    metadata = response_json["metadata"]
+    expense_list = metadata["expense"]
+    partner = expense_list[0]
+    name = partner["_id"]
+    amount = partner["amount"]
+    transactions = partner["list"]
+    return {
+        "name": name,
+        "amount": amount,
+        "transactions": transactions
+    }
+    

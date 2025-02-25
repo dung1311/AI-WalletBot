@@ -34,6 +34,17 @@ class FunctionRegistry:
             return func
         return decorator
     
+    def get_function_info(self, function_name: str):
+        if function_name in self.functions:
+            return self.functions[function_name]
+        return None
+    
+    def get_function_description(self, function_name: str):
+        function_info = self.get_function_info(function_name)
+        if function_info:
+            return function_info.description
+        return None
+
     def get_tools(self):
         descriptions = []
         for func in self.functions.values():
@@ -144,13 +155,17 @@ class FunctionRegistry:
         for call in function_calls:
             # check if the function requires the request object
             func_name = call["name"]
+            # if model can't find the function, add the prefix "function."
+            if not func_name.startswith("function."):
+                func_name = "function." + func_name
             if func_name in self.functions:
                 func_params = inspect.signature(self.functions[func_name].function).parameters
                 print(func_params)
                 if "req" in func_params:
                     call["parameters"]["req"] = req
+                print(call["parameters"])
             try:
-                result = self.execute_function(call["name"], call["parameters"])
+                result = self.execute_function(func_name, call["parameters"])
                 results.append(f"{result}")
             except Exception as e:
                 results.append(f"Error executing {call['name']}: {str(e)}")
