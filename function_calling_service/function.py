@@ -273,7 +273,7 @@ def most_transaction_partner(req: Request):
     name = partner["_id"]
     amount = partner["amount"]
     transactions = partner["list"]
-
+    
     return {
         "name": name,
         "amount": amount,

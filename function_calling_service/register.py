@@ -1,4 +1,4 @@
-from typing import Dict, Callable, Any, List
+from typing import Dict, Callable, Any, List, Tuple
 from function_calling_service.models import Function
 from ollama import Client, ChatResponse
 import inspect
@@ -105,26 +105,34 @@ class FunctionRegistry:
         
         return function_calls
 
-    def summarize_response(self, text, model: str = "qwen2.5:7b"):
+    def summarize_response(self, results: List[Tuple[str, str]], query: str, model: str = "qwen2.5:7b"):
         print("Get summary")
-        response = self.client.chat(
-            model=model,
-            messages=[{
-                "role": "system",
-                "content": """Bạn là một trợ lý hữu ích trong tài chính. Bạn hãy dựa vào tin nhắn của người dùng, sau đó đưa ra tóm tắt ngắn gọn từ 1 đến 2 câu bằng tiếng Việt.
-                    Trả về định dạng json như sau:
-                    summary: đây chính là phần tóm tắt 
+        print(results)
+        descriptions = [desc for (_, desc) in results]
+        contents =  [content for (content, _) in results]
+        print(descriptions)
+        print(contents)
+        try:
+            response = self.client.chat(
+                model=model,
+                messages=[{
+                    "role": "system",
+                    "content": f"""Bạn là một trợ lý hữu ích trong tài chính. Bạn hãy dựa vào tin nhắn của người dùng là {query} và mô tả của hàm {str(descriptions)}, sau đó đưa ra tóm tắt ngắn gọn từ 1 đến 2 câu bằng tiếng Việt để trả lời cho yêu cầu của người dùng.
+                        Trả về định dạng json như sau:
+                        summary: đây chính là phần tóm tắt 
 
-                    Hãy đảm bảo phản hồi bằng tiếng Việt. 
-                """
-            }, {
-                "role": "user",
-                "content": text
-            }],
-            format="json"
-        )
-
-        return json.loads(response.message.content)
+                        Hãy đảm bảo phản hồi bằng tiếng Việt. 
+                    """
+                }, {
+                    "role": "user",
+                    "content": str(contents)
+                }],
+                format="json"
+            )
+            return json.loads(response.message.content)
+        except Exception as e:
+            return f"Error getting summary"
+        
     async def process_query(self, query: str, req: Request, model: str = "qwen2.5:7b") -> str:
         system_prompt = f"""You are a helpful assistant that can call functions.
 
@@ -150,6 +158,9 @@ class FunctionRegistry:
         )
         
         function_calls = self.get_info(response)
+        if len(function_calls) == 0:
+            return "No function calls found"
+        
         results = []
         print(function_calls)
         for call in function_calls:
@@ -158,6 +169,7 @@ class FunctionRegistry:
             # if model can't find the function, add the prefix "function."
             if not func_name.startswith("function."):
                 func_name = "function." + func_name
+
             if func_name in self.functions:
                 func_params = inspect.signature(self.functions[func_name].function).parameters
                 print(func_params)
@@ -166,19 +178,10 @@ class FunctionRegistry:
                 print(call["parameters"])
             try:
                 result = self.execute_function(func_name, call["parameters"])
-                results.append(f"{result}")
+                results.append((f"{result}", self.get_function_description(func_name)))
             except Exception as e:
                 results.append(f"Error executing {call['name']}: {str(e)}")
-        
-        # descriptions = []
-        # for result in results:
-        #     json_result = json.loads(result)
-        #     description = json_result.description
-        #     descriptions.append(description)
-        # results_str = str(descriptions)
-        # print(results_str)
-        # print(results)
-        result_str = str(results)
-        return self.summarize_response(result_str)
+        print(results)
+        return self.summarize_response(results, query)
 
     
