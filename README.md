@@ -6,7 +6,7 @@ WalletBot là hệ thống chatbot AI kết hợp với backend để hỗ trợ
 
 - **BE-WalletBot**: Backend xử lý xác thực và giao dịch.
 - **AI-WalletBot**: Mô hình AI hỗ trợ người dùng tương tác thông qua chatbot.
-- **AIChatBot\_Frontend**: Giao diện web để người dùng tương tác với chatbot.
+- **AIChatBot\_Frontend**: App điện thoại để người dùng tương tác với chatbot.
 
 ## 1. Chuẩn bị môi trường
 
@@ -75,7 +75,7 @@ python server.py
 
 ## 4. Chạy giao diện web
 
-Nếu muốn sử dụng giao diện web để tương tác với chatbot, hãy clone và chạy frontend:
+Nếu muốn sử dụng App để tương tác với chatbot, hãy clone và chạy frontend:
 
 ```sh
 git clone https://github.com/HoangAnhEm/AIChatBot_Frontend.git
