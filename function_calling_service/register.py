@@ -1,21 +1,24 @@
-from typing import Dict, Callable, Any, List, Tuple
+from typing import Dict, Callable, Any, List
 from function_calling_service.models import Function
 from ollama import Client, ChatResponse
 import inspect
 import json
 import re
-import os
 from dotenv import load_dotenv
 from fastapi import Request
+import os
 
 load_dotenv()
 
 class FunctionRegistry:
     def __init__(self):
         self.functions: Dict[str, Function] = {}  # Initialize the dictionary
-        self.client = Client(host=f"http://localhost:11434")
+        self.client = Client(host=f"{os.getenv('OLLAMA_HOST')}")
     
     def register(self, name: str, description: str, parameters: dict = None, required: List = []):
+        """
+            Decorator to regiter function
+        """
         def decorator(func: Callable):
             if parameters is None:
                 sig = inspect.signature(func)
@@ -46,6 +49,9 @@ class FunctionRegistry:
         return None
 
     def get_tools(self):
+        """
+            List tools provide for AI
+        """
         descriptions = []
         for func in self.functions.values():
             desc = {
@@ -61,6 +67,9 @@ class FunctionRegistry:
         return descriptions
     
     def execute_function(self, name: str, parameters: dict) -> Any:
+        """
+            Excute function know name and parameter
+        """
         if name not in self.functions:
             raise ValueError(f"Function {name} not found")
         
@@ -105,83 +114,86 @@ class FunctionRegistry:
         
         return function_calls
 
-    def summarize_response(self, results: List[Tuple[str, str]], query: str, model: str = "qwen2.5:7b"):
-        print("Get summary")
-        print(results)
-        descriptions = [desc for (_, desc) in results]
-        contents =  [content for (content, _) in results]
-        print(descriptions)
-        print(contents)
+    def summarize_response(self, results: List, query: str, model: str = "qwen2.5:7b"):
+        print("GET SUMMARY !!!")
         try:
+            json_data = results if isinstance(results, list) else [results]
+            
             response = self.client.chat(
                 model=model,
-                messages=[{
-                    "role": "system",
-                    "content": f"""Bạn là một trợ lý hữu ích trong tài chính. Bạn hãy dựa vào tin nhắn của người dùng là {query} và mô tả của hàm {str(descriptions)}, sau đó đưa ra tóm tắt ngắn gọn từ 1 đến 2 câu bằng tiếng Việt để trả lời cho yêu cầu của người dùng.
-                        Trả về định dạng json như sau:
-                        summary: đây chính là phần tóm tắt 
+                messages=[
+                    {
+                        "role": "system",
+                        "content": f"""Bạn là một trợ lý tài chính hữu ích. Hãy tóm tắt ngắn gọn kết quả dựa trên câu hỏi của người dùng: {query}. 
 
-                        Hãy đảm bảo phản hồi bằng tiếng Việt. 
-                    """
-                }, {
-                    "role": "user",
-                    "content": str(contents)
-                }],
+                        Trả lời CHÍNH XÁC theo định dạng JSON sau, không thêm bất kỳ nội dung nào khác:
+
+                        "response": "Nội dung tóm tắt ở đây"
+
+                        Lưu ý:
+                        - Tóm tắt bằng 1-3 câu ngắn gọn, không copy nguyên văn.
+                        - Phản hồi bằng tiếng Việt.
+                        - Chỉ trả về một đối tượng JSON duy nhất với một trường "response".
+                        - Đơn vị tiền tệ là VND
+                        """
+                    },
+                    {
+                        "role": "user",
+                        "content": str(results)
+                    }
+                ],
                 format="json"
             )
-            return json.loads(response.message.content)
+            summary = json.loads(response.message.content)
+            return summary['response'] or "Xin lỗi bạn, tôi không thể thực hiện được yêu cầu của bạn"
         except Exception as e:
-            return f"Error getting summary"
+            return f"Lỗi khi tạo tóm tắt: {str(e)}"
+
         
     async def process_query(self, query: str, req: Request, model: str = "qwen2.5:7b") -> str:
-        system_prompt = f"""You are a helpful assistant that can call functions.
+        print("ASK AI !!!")
+        system_prompt = """You are a helpful financial assistant. Analyze the user's query and call the appropriate functions to retrieve the necessary information. Then, provide a concise summary of the results in Vietnamese."""
 
-        When you need to call a function, use the format:
-        function_name(param1: "value1", param2: "value2")
-
-        You can call multiple functions if needed.
-        """
-        print("Chat with AI")
         response = self.client.chat(
             model=model,
             messages=[
-                {
-                    "role": "system",
-                    "content": system_prompt
-                },
-                {
-                    "role": "user",
-                    "content": query
-                }
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": query}
             ],
             tools=self.get_tools()
         )
-        
+
         function_calls = self.get_info(response)
         if len(function_calls) == 0:
-            return "No function calls found"
-        
+            return {
+                "query": query,
+                "results": [],
+                "summary": "Xin lỗi, tôi không thể thực hiện chức năng này. Vui lòng thử lại hoặc thử tính năng khác"
+            }
+
         results = []
-        print(function_calls)
         for call in function_calls:
-            # check if the function requires the request object
             func_name = call["name"]
-            # if model can't find the function, add the prefix "function."
             if not func_name.startswith("function."):
                 func_name = "function." + func_name
 
             if func_name in self.functions:
                 func_params = inspect.signature(self.functions[func_name].function).parameters
-                print(func_params)
                 if "req" in func_params:
                     call["parameters"]["req"] = req
-                print(call["parameters"])
-            try:
-                result = self.execute_function(func_name, call["parameters"])
-                results.append((f"{result}", self.get_function_description(func_name)))
-            except Exception as e:
-                results.append(f"Error executing {call['name']}: {str(e)}")
-        print(results)
-        return self.summarize_response(results, query)
+                try:
+                    print(func_name, call['parameters'])
+                    result = self.execute_function(func_name, call["parameters"])
+                    results.append(result)
+                except Exception as e:
+                    results.append({"error": str(e)})
+        print(results, "hehe")
+        summary = self.summarize_response(results, query)
+        return {
+            "query": query,
+            "results": results,
+            "summary": summary
+        }
+
 
     

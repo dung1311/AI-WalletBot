@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request, Response
+from fastapi.responses import JSONResponse
 import jwt
 from jwt.exceptions import InvalidTokenError
 from dotenv import load_dotenv
@@ -16,29 +17,29 @@ load_dotenv()
 
 app = FastAPI()
 
-# @app.middleware("http")
-# async def authenticate(req: Request, next):
-#     token = req.headers.get("Authorization")
-#     if not token:
-#         return Response(status_code=400, content=json.dumps({
-#             "code": "400",
-#             "message": "Token is required",
-#             "metadata": None
-#         }))
-#     # remove Bearer
-#     token = token.split(" ")[-1]
+@app.middleware("http")
+async def authenticate(req: Request, next):
+    token = req.headers.get("Authorization")
+    if not token:
+        return Response(status_code=400, content=json.dumps({
+            "code": "400",
+            "message": "Token is required",
+            "metadata": None
+        }))
+    # remove Bearer
+    token = token.split(" ")[-1]
 
-#     try:
-#         decodeUser = jwt.decode(token, os.getenv("JWT_SECRET_ACCESS"), algorithms=["HS256"])
-#         req.state.user = decodeUser
+    try:
+        decodeUser = jwt.decode(token, os.getenv("JWT_SECRET_ACCESS"), algorithms=["HS256"])
+        req.state.user = decodeUser
 
-#         return await next(req)
-#     except InvalidTokenError:
-#         return Response(status_code=400, content=json.dumps({
-#             "code": "400",
-#             "message": "Invalid token",
-#             "metadata": None
-#         }))
+        return await next(req)
+    except InvalidTokenError:
+        return Response(status_code=400, content=json.dumps({
+            "code": "400",
+            "message": "Invalid token",
+            "metadata": None
+        }))
 
 @app.get("/")
 def index():
@@ -86,29 +87,27 @@ async def askAI(req: Request):
     }
 
 @app.get("/test")
-def test(req: Request):
+def get_expenses(req: Request, page: int = 1, pageSize: int = 5):
     accessToken = req.headers.get("Authorization")
     headers = {
         "Content-Type": "application/json",
         'Authorization': f'Bearer {accessToken}'
     }
-
     params = {
-        "option": -1
+        "page": page,
+        "pageSize": pageSize
     }
-
-    response = requests.get(f"http://localhost:3000/expense/sortPartner", headers=headers, params=params)
-
+    response = requests.get(f"http://localhost:3000/expense/get-expense", headers=headers, params=params)
     response_json = response.json()
-    metadata = response_json["metadata"]
-    expense_list = metadata["expense"]
-    partner = expense_list[0]
-    name = partner["_id"]
-    amount = partner["amount"]
-    transactions = partner["list"]
-    return {
-        "name": name,
-        "amount": amount,
-        "transactions": transactions
-    }
+
+    results = []
+    expenses_list = response_json['metadata']['Expenses']
+    for expense in expenses_list:
+        results.append({
+            "amount": expense['amount'],
+            "category": expense['category'],
+            "description": expense['description']
+        })
+    
+    return JSONResponse(content=results)
     

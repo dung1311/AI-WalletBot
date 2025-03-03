@@ -1,9 +1,6 @@
-from typing import Callable
 from function_calling_service.register import FunctionRegistry
 import requests
 from fastapi import Request
-from fastapi.responses import JSONResponse
-import json
 import os
 from dotenv import load_dotenv
 from datetime import date
@@ -14,29 +11,55 @@ URL = os.getenv("NODE_URL")
 registry = FunctionRegistry()
 
 @registry.register(
-        name="function.get_all_expenses",
-        description="Get all expenses of a user",
+        name="function.get_expenses",
+        description="Get expenses for user when know page and pageSize, default return last 5 documents",
         parameters={
             "type": "object",
             "properties": {
                 "req": {
                     "type": "Request",
                     "description": "Request object of FastAPI"
+                },
+                "page": {
+                    "type": "int",
+                    "description": "Page number for pagination (starting from 1)",
+                    "minium": 1,
+                    "default": 1
+                },
+                "pageSize": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10, 
+                "description": "Number of documents per page.",
+                "default": 5
                 }
             }
         },
         required=[]
 )
-def get_all_expenses(req: Request):
+def get_expenses(req: Request, page: int = 1, pageSize: int = 5):
     accessToken = req.headers.get("Authorization")
     headers = {
         "Content-Type": "application/json",
         'Authorization': f'Bearer {accessToken}'
     }
+    params = {
+        "page": page,
+        "pageSize": pageSize
+    }
+    response = requests.get(f"{URL}/expense/get-expense", headers=headers, params=params)
+    response_json = response.json()
 
-    response = requests.get(f"{URL}/get-expense", headers=headers)
+    results = []
+    expenses_list = response_json['metadata']['Expenses']
+    for expense in expenses_list:
+        results.append({
+            "amount": expense['amount'],
+            "category": expense['category'],
+            "description": expense['description']
+        })
     
-    return response.json()
+    return {"expenses": results, "total_count": len(results)}
 
 @registry.register(
     name="function.get_expense_by_amount",
@@ -56,12 +79,25 @@ def get_all_expenses(req: Request):
                 "type": "date",
                 "description": "Transaction query start date, default is 2025-01-01. Format: YYYY-MM-DD. Remember that if dont provide this parameter, the default value is 2025-01-01",
                 "default": "2025-01-01"
+            },
+            "page": {
+                    "type": "int",
+                    "description": "Page number for pagination (starting from 1)",
+                    "minium": 1,
+                    "default": 1
+            },
+            "pageSize": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10, 
+            "description": "Number of documents per page.",
+            "default": 5
             }
         }
     },
     required=["amount"]
 )
-def get_expense_by_amount(req: Request, amount: float, sinceBy: date = None):
+def get_expense_by_amount(req: Request, amount: float, sinceBy: date = None, page: int = 1, pageSize: int = 5):
     accessToken = req.headers.get("Authorization")
     headers = {
         "Content-Type": "application/json",
@@ -76,7 +112,17 @@ def get_expense_by_amount(req: Request, amount: float, sinceBy: date = None):
     
     response = requests.get(f"{URL}/expense/getExpenseByAmount", headers=headers, params=params)
     
-    return response.json()
+    response_json = response.json()
+    results = []
+    expenses_list = response_json['metadata']['expense']
+    for expense in expenses_list:
+        results.append({
+            "amount": expense['amount'],
+            "category": expense['category'],
+            "description": expense['description']
+        })
+    
+    return {"expenses": results, "total_count": len(results)}
 
 @registry.register(
         name="function.get_expense_by_category",
@@ -92,12 +138,25 @@ def get_expense_by_amount(req: Request, amount: float, sinceBy: date = None):
                     "type": "string",
                     "description": "The category the user asks for. Category have to be one of the following: 'giải trí', 'mua sắm', 'di chuyển', 'sức khỏe', 'ăn uống', 'hóa đơn', 'nợ', 'khác'",
                     "default": "khác"
+                },
+                "page": {
+                    "type": "int",
+                    "description": "Page number for pagination (starting from 1)",
+                    "minium": 1,
+                    "default": 1
+                },
+                "pageSize": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10, 
+                "description": "Number of documents per page.",
+                "default": 5
                 }
             }
         },
         required=["category"]
 )
-def get_expense_by_category(req: Request, category: str):
+def get_expense_by_category(req: Request, category: str, page: int = 1, pageSize: int = 5):
     accessToken = req.headers.get("Authorization")
     headers = {
         "Content-Type": "application/json",
@@ -105,12 +164,83 @@ def get_expense_by_category(req: Request, category: str):
     }
 
     params = {
-        "category": category
+        "category": category,
+        "page": page,
+        "pageSize": pageSize        
     }
 
-    response = requests.get(f"{URL}/expense/getExpenseByCategory", headers=headers, params=params)
+    response = requests.get(f"{URL}/expense/get-expense", headers=headers, params=params)
+    response_json = response.json()
+
+    results = []
+    expenses_list = response_json['metadata']['Expenses']
+    for expense in expenses_list:
+        results.append({
+            "amount": expense['amount'],
+            "category": expense['category'],
+            "description": expense['description']
+        })
     
-    return response.json()
+    return {"expenses": results, "total_count": len(results)}
+
+@registry.register(
+        name="function.get_expense_by_type",
+        description="Get a list of expenses to see if they are sent or received. type here is ['gửi', 'nhận']",
+        parameters={
+            "type": "object",
+            "properties": {
+                "req": {
+                    "type": "Request",
+                    "description": "Request object of FastAPI"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The category the user asks for. type have to be one of the following: 'gửi', 'nhận'. Example 'chi' = 'gửi', 'thu' = 'nhận'",
+                    "default": "gửi"
+                },
+                "page": {
+                    "type": "int",
+                    "description": "Page number for pagination (starting from 1)",
+                    "minium": 1,
+                    "default": 1
+                },
+                "pageSize": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10, 
+                "description": "Number of documents per page.",
+                "default": 5
+                }
+            }
+        },
+        required=["type"]
+)
+def get_expense_by_type(req: Request, type: str, page: int = 1, pageSize: int = 5):
+    accessToken = req.headers.get("Authorization")
+    headers = {
+        "Content-Type": "application/json",
+        'Authorization': f'Bearer {accessToken}'
+    }
+
+    params = {
+        "type": type,
+        "page": page,
+        "pageSize": pageSize        
+    }
+
+    response = requests.get(f"{URL}/expense/get-expense", headers=headers, params=params)
+    response_json = response.json()
+
+    results = []
+    expenses_list = response_json['metadata']['Expenses']
+    for expense in expenses_list:
+        results.append({
+            "amount": expense['amount'],
+            "category": expense['category'],
+            "description": expense['description']
+        })
+    
+    return {"expenses": results, "total_count": len(results)}
 
 @registry.register(
         name="function.get_max_expense",
@@ -134,12 +264,18 @@ def get_max_expense(req: Request):
     }
 
     params = {
-        "option": 1
+        "option": -1
     }
 
     response = requests.get(f"{URL}/expense/sortExpenses", headers=headers, params=params)
 
-    return response.json()
+    response_json = response.json()
+    max_expense = response_json.get('metadata', {}).get('expense', [])[0]
+    return {"expenses": {
+        "amount": max_expense['amount'],
+        "category": max_expense['category'],
+        "description": max_expense['description']
+    }}
 
 @registry.register(
         name="function.get_min_expense",
@@ -163,12 +299,18 @@ def get_min_expense(req: Request):
     }
 
     params = {
-        "option": -1
+        "option": 1
     }
 
     response = requests.get(f"{URL}/expense/sortExpenses", headers=headers, params=params)
 
-    return response.json()
+    response_json = response.json()
+    min_expense = response_json.get('metadata', {}).get('expense', [])[0]
+    return {"expenses": {
+        "amount": min_expense['amount'],
+        "category": min_expense['category'],
+        "description": min_expense['description']
+    }}
 
 @registry.register(
         name="function.get_expense_by_date",
@@ -189,12 +331,25 @@ def get_min_expense(req: Request):
                     "type": "date",
                     "description": "The end date of the date range. Format: YYYY-MM-DD. Default is 2029-01-01",
                     "default": "2029-01-01"
+                },
+                "page": {
+                    "type": "int",
+                    "description": "Page number for pagination (starting from 1)",
+                    "minium": 1,
+                    "default": 1
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10, 
+                    "description": "Number of documents per page.",
+                    "default": 5
                 }
             }
         },
         required=[]
 )
-def get_expense_by_date(req: Request, start: date = "2025-01-01", end: date = "2029-01-01"):
+def get_expense_by_date(req: Request, start: date = "2025-01-01", end: date = "2029-01-01", page: int = 1, pageSize: int = 5):
     accessToken = req.headers.get("Authorization")
     headers = {
         "Content-Type": "application/json",
@@ -202,13 +357,25 @@ def get_expense_by_date(req: Request, start: date = "2025-01-01", end: date = "2
     }
 
     params = {
-        "from": start,
-        "to": end
+        "startDate": start,
+        "endDate": end,
+        "page": page,
+        "pageSize": pageSize
     }
 
-    response = requests.get(f"{URL}/expense/getExpenseByDate", headers=headers, params=params)
+    response = requests.get(f"{URL}/expense/get-expense", headers=headers, params=params)
 
-    return response.json()
+    response_json = response.json()
+    results = []
+    expenses_list = response_json['metadata']['Expenses']
+    for expense in expenses_list:
+        results.append({
+            "amount": expense['amount'],
+            "category": expense['category'],
+            "description": expense['description']
+        })
+    
+    return {"expenses": results, "total_count": len(results)}
 
 @registry.register(
         name="function.search_expenses",
@@ -223,21 +390,50 @@ def get_expense_by_date(req: Request, start: date = "2025-01-01", end: date = "2
                 "keySearch": {
                     "type": "string",
                     "description": "key to search for"
+                },
+                "page": {
+                    "type": "int",
+                    "description": "Page number for pagination (starting from 1)",
+                    "minium": 1,
+                    "default": 1
+                },
+                "pageSize": {
+                    "type": "int",
+                    "minimum": 1,
+                    "maximum": 10, 
+                    "description": "Number of documents per page.",
+                    "default": 5
                 }
             }
         },
         required=["keySearch"]
 )
-def search_expenses(req: Request, keySearch: str):
+def search_expenses(req: Request, keySearch: str, page: int = 1, pageSize: int = 5):
     accessToken = req.headers.get("Authorization")
     headers = {
         "Content-Type": "application/json",
         'Authorization': f'Bearer {accessToken}'
     }  
+    
+    params = {
+        "searchText": keySearch,
+        'page': page,
+        'pageSize': pageSize
+    }
 
-    response = requests.get(f"{URL}/expense/search/{keySearch}", headers=headers)
+    response = requests.get(f"{URL}/expense/get-expense", headers=headers, params=params)
 
-    return response.json()
+    response_json = response.json()
+    results = []
+    expenses_list = response_json['metadata']['Expenses']
+    for expense in expenses_list:
+        results.append({
+            "amount": expense['amount'],
+            "category": expense['category'],
+            "description": expense['description']
+        })
+    
+    return {"expenses": results, "total_count": len(results)}
 
 @registry.register(
         name="function.most_transaction_partner",
@@ -275,7 +471,10 @@ def most_transaction_partner(req: Request):
     transactions = partner["list"]
     
     return {
-        "name": name,
-        "amount": amount,
-        "transactions": transactions
+        "partner": {
+            "name": name,
+            "total_amount": float(amount),
+            "transaction_count": len(transactions),
+            "transactions": transactions
+        }
     }
